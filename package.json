@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/github_account/react-native-pagecall.git",
-    "baseUrl": "https://github.com/github_account/react-native-pagecall"
+    "url": "git+https://github.com/pplink/react-native-pagecall.git",
+    "baseUrl": "https://github.com/pplink/react-native-pagecall"
   },
   "keywords": [
-    "react-native"
+    "react-native-pagecall"
   ],
   "author": {
-    "name": "Your Name",
-    "email": "yourname@email.com"
+    "name": "defsehun",
+    "email": "sehun@pplink.net"
   },
   "license": "MIT",
   "licenseFilename": "LICENSE",
