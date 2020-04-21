@@ -1,7 +1,7 @@
 {
   "name": "react-native-pagecall",
   "title": "React Native Pagecall",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "TODO",
   "main": "index.js",
   "scripts": {
@@ -13,10 +13,10 @@
     "baseUrl": "https://github.com/pplink/react-native-pagecall"
   },
   "keywords": [
-    "react-native-pagecall"
+    "react-native"
   ],
   "author": {
-    "name": "defsehun",
+    "name": "Sehun",
     "email": "sehun@pplink.net"
   },
   "license": "MIT",

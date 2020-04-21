@@ -31,10 +31,16 @@ NS_ASSUME_NONNULL_BEGIN
 // PCA Call
 - (void)callMyID:(NSString *)myID roomID:(NSString *)roomID serverURL:(NSString*)serverURL;
 
+// PCA Replay
+- (void)replayWithRoomID:(NSString *)roomID serverURL:(NSString*)serverURL;
+
+// Join LSA
+- (void)joinLSA:(BOOL)hosting serverURL:(NSString *)serverURL roomID:(NSString *)roomID userID:(NSString *)uesrID userName:(NSString *)userName;
+
 // Load HTML String
 - (void)loadHTMLString:(NSString *)htmlString;
 
-// Load URL
+// Request with URL
 - (void)webViewLoadRequestWithURLString:(NSString *)urlString;
 
 // Close the PageCall window

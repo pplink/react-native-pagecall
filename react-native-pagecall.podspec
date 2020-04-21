@@ -9,12 +9,14 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
                   react-native-pagecall
                    DESC
-  s.homepage     = "https://github.com/github_account/react-native-pagecall"
+  s.homepage     = "https://github.com/pplink/react-native-pagecall"
+  # brief license entry:
   s.license      = "MIT"
-  # s.license    = { :type => "MIT", :file => "FILE_LICENSE" }
-  s.authors      = { "Your Name" => "yourname@email.com" }
+  # optional - use expanded license entry instead:
+  # s.license    = { :type => "MIT", :file => "LICENSE" }
+  s.authors      = { "Sehun" => "sehun@pplink.net" }
   s.platforms    = { :ios => "9.0" }
-  s.source       = { :git => "https://github.com/github_account/react-native-pagecall.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/pplink/react-native-pagecall.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,swift}"
   s.requires_arc = true

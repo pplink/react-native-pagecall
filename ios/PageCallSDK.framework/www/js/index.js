@@ -49,9 +49,9 @@ var app = {
             console.log('load adapter.js');
         }
         
-        // log level
-        var logger = require('cordova/plugin/ios/logger');
-        logger.level('ERROR');
+        // Set log level ERROR
+        //var logger = require('cordova/plugin/ios/logger');
+        //logger.level('ERROR');
         
         document.addEventListener('pause', this.onPause, false);
         document.addEventListener('resume', this.onResume, false);
@@ -173,7 +173,7 @@ function mapDOM(element, json) {
 
 function loadHtml(html) {
   var json = mapDOM(html, false);
-  // console.log('json', json);
+  console.log('json', json);
   (function (map, window) {
     if (!window) console.error('global variable \'window\' is needed');
 
@@ -222,9 +222,9 @@ function loadHtml(html) {
     };
 
     var createNode = function (elem, parentNode) {
-      //console.log('createNode invoked', elem, parentNode);
+      console.log('createNode invoked', elem, parentNode);
       var currentNode = makeCurrentNode(elem);
-      //console.log('currentNode', currentNode);
+      console.log('currentNode', currentNode);
       var childElems = elem.content;
 
       for (var idx in childElems) {
