@@ -17,8 +17,8 @@ RCT_EXPORT_METHOD(onPageCall) {
     dispatch_async(dispatch_get_main_queue(), ^{
         RCTLog(@"in function");
 
-        NSString *strMyID = @"testID";
-        NSString *strRoomID = @"testRoomID";
+        NSString *strMyID = @"RNPageCallTestID";
+        NSString *strRoomID = @"RNPageCallTestRoomID";
         NSString *strServerURL = @"https://pplink.net";
 
         PageCall *pageCall = [PageCall sharedInstance];
