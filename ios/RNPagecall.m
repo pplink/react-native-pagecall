@@ -15,7 +15,7 @@ RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnu
 
 RCT_EXPORT_METHOD(onPageCall) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RCTLog(@"in function");
+        RCTLog(@"onPageCall invoke");
 
         NSString *strMyID = @"RNPageCallTestID";
         NSString *strRoomID = @"RNPageCallTestRoomID";
@@ -37,6 +37,35 @@ RCT_EXPORT_METHOD(onPageCall) {
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
             [pageCall callMyID:strMyID roomID:strRoomID serverURL:strServerURL];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(onLSA) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        RCTLog(@"onLSA invoke");
+
+        NSString *userId = @"";
+        NSString *userName = @"host";
+        NSString *roomId = @"class101_peter_test";
+        NSString *serverURL = @"https://lsa-demo.pplink.net";
+
+        PageCall *pageCall = [PageCall sharedInstance];
+        //[pageCall setDelegate:self];
+
+        #if DEBUG
+        #else
+        [pageCall redirectLogToDocumentsWithInterval:1];
+        #endif
+        pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+
+        UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+        while (rootViewController.presentedViewController != nil) {
+            rootViewController = rootViewController.presentedViewController;
+        }
+
+        [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
+            [pageCall joinLSA:YES serverURL:serverURL roomID:roomId userID:userId userName:userName];
         }];
     });
 }

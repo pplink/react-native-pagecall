@@ -36,6 +36,10 @@ export default class App extends Component<{}> {
           onPress={() => RNPagecall.onPageCall()}
           title="Run PageCall"
         />
+        <Button
+          onPress={() => RNPagecall.onLSA()}
+          title="Run LSA"
+        />
       </View>
     );
   }
