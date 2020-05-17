@@ -7,19 +7,9 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(sampleMethod:(NSString *)stringArgument numberParameter:(nonnull NSNumber *)numberArgument callback:(RCTResponseSenderBlock)callback)
-{
-    // TODO: Implement some actually useful functionality
-    callback(@[[NSString stringWithFormat: @"numberArgument: %@ stringArgument: %@", numberArgument, stringArgument]]);
-}
-
-RCT_EXPORT_METHOD(onPageCall) {
+RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)roomID myID:(NSString *)myID) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RCTLog(@"onPageCall invoke");
-
-        NSString *strMyID = @"RNPageCallTestID";
-        NSString *strRoomID = @"RNPageCallTestRoomID";
-        NSString *strServerURL = @"https://pplink.net";
+        RCTLog(@"startPageCallWithURL:%@, roomID:%@, myID:%@", serverURL, roomID, myID);
 
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
@@ -36,19 +26,14 @@ RCT_EXPORT_METHOD(onPageCall) {
         }
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
-            [pageCall callMyID:strMyID roomID:strRoomID serverURL:strServerURL];
+            [pageCall callMyID:myID roomID:roomID serverURL:serverURL];
         }];
     });
 }
 
-RCT_EXPORT_METHOD(onLSA) {
+RCT_EXPORT_METHOD(startLiveStreamingWithURL:(NSString *)serverURL isHost:(BOOL)isHost roomID:(NSString *)roomID userID:(NSString *)userID userName:(NSString *)userName) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RCTLog(@"onLSA invoke");
-
-        NSString *userId = @"";
-        NSString *userName = @"host";
-        NSString *roomId = @"class101_peter_test";
-        NSString *serverURL = @"https://lsa-demo.pplink.net";
+        RCTLog(@"startLiveStreamingWithURL:%@, roomID:%@, userID:%@, userName:%@", serverURL, roomID, userID, userName);
 
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
@@ -65,7 +50,7 @@ RCT_EXPORT_METHOD(onLSA) {
         }
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
-            [pageCall joinLSA:YES serverURL:serverURL roomID:roomId userID:userId userName:userName];
+            [pageCall liveStreamingWithURL:serverURL isHost:isHost roomID:roomID userID:userID userName:userName];
         }];
     });
 }

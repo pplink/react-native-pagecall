@@ -9,37 +9,63 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { 
+  StyleSheet, 
+  Text, 
+  View, 
+  TextInput,
+  TouchableOpacity 
+} from 'react-native';
 import RNPagecall from 'react-native-pagecall';
 
-export default class App extends Component<{}> {
+export default class App extends Component {
   state = {
-    status: 'starting',
-    message: '--'
+    serverURL: "https://pplink.net",
+    roomID: "class101_test_peter_0517"
   };
+
+  handleURL = text => {
+    this.setState({ serverURL: text });
+  };
+ 
+  handleRoomID = text => {
+    this.setState({ roomID: text });
+  };
+
+  startLiveStreaming = (serverURL, roomID) => {
+    RNPagecall.startLiveStreamingWithURL(serverURL, false, roomID, "","");
+  };
+
   componentDidMount() {
-    RNPagecall.sampleMethod('Testing', 123, (message) => {
-      this.setState({
-        status: 'native callback received',
-        message
-      });
-    });
+    
   }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>☆RNPagecall example☆</Text>
-        <Text style={styles.instructions}>STATUS: {this.state.status}</Text>
-        <Text style={styles.welcome}>☆NATIVE CALLBACK MESSAGE☆</Text>
-        <Text style={styles.instructions}>{this.state.message}</Text>
-        <Button
-          onPress={() => RNPagecall.onPageCall()}
-          title="Run PageCall"
+        <Text style={styles.title}>Live Streaming Example</Text>
+        <TextInput
+          style={styles.input}
+          underlineColorAndroid="transparent"
+          placeholder="URL"
+          placeholderTextColor="#9a73ef"
+          autoCapitalize="none"
+          onChangeText={this.handleURL}
         />
-        <Button
-          onPress={() => RNPagecall.onLSA()}
-          title="Run LSA"
+        <TextInput
+          style={styles.input}
+          underlineColorAndroid="transparent"
+          placeholder="RoomID"
+          placeholderTextColor="#9a73ef"
+          autoCapitalize="none"
+          onChangeText={this.handleRoomID}
         />
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={() => this.startLiveStreaming(this.state.serverURL, this.state.roomID)}
+        >
+          <Text style={styles.submitButtonText}>Start!!</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -49,17 +75,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    //alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    paddingTop: 30
   },
-  welcome: {
+  title: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: 'left',
+    margin: 15,
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  input: {
+    margin: 15,
+    height: 40,
+    borderColor: "#7a42f4",
+    borderWidth: 1
   },
+  submitButton: {
+    backgroundColor: "#7a42f4",
+    padding: 10,
+    margin: 15,
+    height: 40
+  },
+  submitButtonText: {
+    color: "white"
+  }
 });
