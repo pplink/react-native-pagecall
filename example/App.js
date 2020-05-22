@@ -14,14 +14,15 @@ import {
   Text, 
   View, 
   TextInput,
-  TouchableOpacity 
+  TouchableOpacity
 } from 'react-native';
 import RNPagecall from 'react-native-pagecall';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class App extends Component {
   state = {
-    serverURL: "https://pplink.net",
-    roomID: "class101_test_peter_0517"
+    serverURL: "",
+    roomID: ""
   };
 
   handleURL = text => {
@@ -33,11 +34,16 @@ export default class App extends Component {
   };
 
   startLiveStreaming = (serverURL, roomID) => {
+    AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
     RNPagecall.startLiveStreamingWithURL(serverURL, false, roomID, "","");
   };
 
   componentDidMount() {
-    
+    AsyncStorage.getItem('userInfo').then((state)=> {
+        if( state != null){
+            this.setState(JSON.parse(state));
+        }
+    });
   }
 
   render() {
@@ -51,6 +57,7 @@ export default class App extends Component {
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
           onChangeText={this.handleURL}
+          value={this.state.serverURL}
         />
         <TextInput
           style={styles.input}
@@ -59,6 +66,7 @@ export default class App extends Component {
           placeholderTextColor="#9a73ef"
           autoCapitalize="none"
           onChangeText={this.handleRoomID}
+          value={this.state.roomID}
         />
         <TouchableOpacity
           style={styles.submitButton}
@@ -74,7 +82,7 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    //justifyContent: 'center',
     //alignItems: 'center',
     backgroundColor: '#F5FCFF',
     paddingTop: 30
