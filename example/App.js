@@ -21,8 +21,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default class App extends Component {
   state = {
-    serverURL: "",
-    roomID: ""
+    serverURL: ""
+    //roomID: ""
   };
 
   handleURL = text => {
@@ -33,9 +33,14 @@ export default class App extends Component {
     this.setState({ roomID: text });
   };
 
-  startLiveStreaming = (serverURL, roomID) => {
+  // startLiveStreaming = (serverURL, roomID) => {
+  //   AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
+  //   RNPagecall.startLiveStreamingWithURL(serverURL, false, roomID, "","");
+  // };
+
+  startLiveStreaming = (serverURL) => {
     AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
-    RNPagecall.startLiveStreamingWithURL(serverURL, false, roomID, "","");
+    RNPagecall.startLiveStreamingWithURL(serverURL);
   };
 
   componentDidMount() {
@@ -59,7 +64,7 @@ export default class App extends Component {
           onChangeText={this.handleURL}
           value={this.state.serverURL}
         />
-        <TextInput
+        {/* <TextInput
           style={styles.input}
           underlineColorAndroid="transparent"
           placeholder="RoomID"
@@ -67,10 +72,11 @@ export default class App extends Component {
           autoCapitalize="none"
           onChangeText={this.handleRoomID}
           value={this.state.roomID}
-        />
+        /> */}
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => this.startLiveStreaming(this.state.serverURL, this.state.roomID)}
+          //onPress={() => this.startLiveStreaming(this.state.serverURL, this.state.roomID)}
+          onPress={() => this.startLiveStreaming(this.state.serverURL)}
         >
           <Text style={styles.submitButtonText}>Start!!</Text>
         </TouchableOpacity>
@@ -95,6 +101,7 @@ const styles = StyleSheet.create({
   input: {
     margin: 15,
     height: 40,
+    color: "black",
     borderColor: "#7a42f4",
     borderWidth: 1
   },

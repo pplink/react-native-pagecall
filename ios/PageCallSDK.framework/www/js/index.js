@@ -36,9 +36,8 @@ var app = {
             cordova.plugins.iosrtc.debug.enable(false);
             
             // Set log level ERROR
-            var logger = cordova.require('cordova/plugin/ios/logger');
-            logger.useLogger(false);
-            //console.log('Set cordova logger');
+            //var logger = cordova.require('cordova/plugin/ios/logger');
+            //logger.useLogger(false);
             
             // Expose WebRTC and GetUserMedia SHIM as Globals (Optional)
             // Alternatively WebRTC API will be inside cordova.plugins.iosrtc namespace
