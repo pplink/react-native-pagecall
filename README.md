@@ -54,6 +54,22 @@ RNPagecall.startPageCallWithURL("https://pplink.net", "roomID", "myID");
 ## Start live streaming
 
 ```jsx
-// PCA URL, isHost, RoomID, UserID, UserName
-RNPagecall.startLiveStreamingWithURL("https://pplink.net", false, "roomID", "userID", "userName");
+// LSA URL
+~~RNPagecall.startLiveStreamingWithURL("https://pplink.net", false, "roomID", "userID", "userName");~~
+RNPagecall.startLiveStreamingWithURL("https://pplink.net/live/test_room");
+```
+
+## Add a Privacy Policy
+
+You can add a **Privacy Policy** to your iOS project's info.plist like shown below. 
+
+```xml
+<key>NSCameraUsageDescription</key>
+<string>Blink uses your camera to make video calls.</string>
+<key>NSContactsUsageDescription</key>
+<string>Blink needs access to your contacts in order to be able to call them.</string>
+<key>NSMicrophoneUsageDescription</key>
+<string>Blink uses your microphone to make calls.</string>
+<key>NSPhotoLibraryAddUsageDescription</key>
+<string>Our application needs permission to write photos...</string>
 ```
