@@ -55,7 +55,6 @@ RNPagecall.startPageCallWithURL("https://pplink.net", "roomID", "myID");
 
 ```jsx
 // LSA URL
-~~RNPagecall.startLiveStreamingWithURL("https://pplink.net", false, "roomID", "userID", "userName");~~
 RNPagecall.startLiveStreamingWithURL("https://pplink.net/live/test_room");
 ```
 
