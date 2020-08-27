@@ -26,7 +26,7 @@ RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)
         }
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
-            [pageCall callMyID:myID roomID:roomID serverURL:serverURL appName:nil template:nil];
+            [pageCall call:serverURL publicRoomId:roomID query:nil];
         }];
     });
 }
