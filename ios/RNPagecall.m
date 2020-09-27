@@ -10,6 +10,14 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)roomID myID:(NSString *)myID) {
     dispatch_async(dispatch_get_main_queue(), ^{
         RCTLog(@"startPageCallWithURL:%@, roomID:%@, myID:%@", serverURL, roomID, myID);
+        
+        // Create urlRequest
+        NSString *requestUrl = @"";
+        if ([serverURL hasSuffix:@"/"]) {
+            requestUrl = [NSString stringWithFormat:@"%@call", serverURL];
+        } else {
+            requestUrl = [NSString stringWithFormat:@"%@/call", serverURL];
+        }
 
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
@@ -26,7 +34,7 @@ RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)
         }
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
-            [pageCall call:serverURL publicRoomId:roomID query:nil];
+            [pageCall call:requestUrl publicRoomId:roomID query:nil];
         }];
     });
 }

@@ -27,6 +27,7 @@ var app = {
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
+        // cordova settings
         var cordova = window.cordova;
         if (cordova && cordova.plugins && cordova.plugins.iosrtc && cordova.platformId === 'ios') {
             // Expose WebRTC and GetUserMedia SHIM as Globals (Optional)
@@ -43,6 +44,9 @@ var app = {
             logger.useLogger(true);
             logger.level(logger.ERROR);
             
+            // Use speaker audio output
+            cordova.plugins.iosrtc.selectAudioOutput('speaker');
+            
             // load adapter.js
             var adapterVersion = 'latest';
             var script = document.createElement("script");
@@ -51,15 +55,10 @@ var app = {
             script.async = false;
             document.getElementsByTagName("head")[0].appendChild(script);
             console.log('Load adapter.js');
-            console.log('Cordova device ready!!!');
         }
         
         document.addEventListener('pause', this.onPause, false);
         document.addEventListener('resume', this.onResume, false);
-        document.addEventListener('audioroute-changed',
-           function(event) {
-              console.log('Audio route changed: ' + event.reason);
-        });
         
         this.receivedEvent('deviceready');
     },
