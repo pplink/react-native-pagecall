@@ -42,7 +42,7 @@ export default class App extends Component {
     AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
     //RNPagecall.startLiveStreamingWithURL(serverURL);
     // PCA URL, publicRoomId, query
-    RNPagecall.startPageCallWithUrl("https://pplink.net/call", "publicRoomId_RN_Test", null);
+    RNPagecall.startPageCallWithUrl("https://pplink.net/call", "publicRoomId_Test", null);
   };
 
   componentDidMount() {

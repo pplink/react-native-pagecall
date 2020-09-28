@@ -47,8 +47,8 @@ import RNPagecall from 'react-native-pagecall';
 ## Start PageCall
 
 ```jsx
-// PCA URL, RoomID, MyID
-RNPagecall.startPageCallWithURL("https://pplink.net", "roomID", "myID");
+// PCA URL, publicRoomId, query
+RNPagecall.startPageCallWithUrl("https://pplink.net/call", "publicRoomId", null);
 ```
 
 ## Start live streaming
