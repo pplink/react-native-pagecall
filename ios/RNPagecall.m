@@ -7,25 +7,17 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)roomID myID:(NSString *)myID) {
+RCT_EXPORT_METHOD(startPageCallWithUrl:(NSString *)requestUrl publicRoomId:(NSString *)publicRoomId query:(NSString *)query) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RCTLog(@"startPageCallWithURL:%@, roomID:%@, myID:%@", serverURL, roomID, myID);
+        RCTLog(@"startPageCallWithURL:%@, publicRoomId:%@, query:%@", requestUrl, publicRoomId, query);
         
-        // Create urlRequest
-        NSString *requestUrl = @"";
-        if ([serverURL hasSuffix:@"/"]) {
-            requestUrl = [NSString stringWithFormat:@"%@call", serverURL];
-        } else {
-            requestUrl = [NSString stringWithFormat:@"%@/call", serverURL];
-        }
-
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
 
-        #if DEBUG
-        #else
-        [pageCall redirectLogToDocumentsWithInterval:1];
-        #endif
+//        #if DEBUG
+//        #else
+//        [pageCall redirectLogToDocumentsWithTimeInterval:4];
+//        #endif
         pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
 
         UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
@@ -34,7 +26,7 @@ RCT_EXPORT_METHOD(startPageCallWithURL:(NSString *)serverURL roomID:(NSString *)
         }
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
-            [pageCall call:requestUrl publicRoomId:roomID query:nil];
+            [pageCall call:requestUrl publicRoomId:publicRoomId query:query];
         }];
     });
 }
@@ -46,11 +38,6 @@ RCT_EXPORT_METHOD(startLiveStreamingWithURL:(NSString *)serverURL) {
 
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
-
-        #if DEBUG
-        #else
-        //[pageCall redirectLogToDocumentsWithRoomCount:3];
-        #endif
         
         pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
