@@ -7,19 +7,12 @@
 
 RCT_EXPORT_MODULE()
 
-RCT_EXPORT_METHOD(startPageCallWithUrl:(NSString *)requestUrl publicRoomId:(NSString *)publicRoomId query:(NSString *)query) {
+RCT_EXPORT_METHOD(call:(NSString *)requestUrl publicRoomId:(NSString *)publicRoomId query:(NSString *)query) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        RCTLog(@"startPageCallWithURL:%@, publicRoomId:%@, query:%@", requestUrl, publicRoomId, query);
+        RCTLog(@"RNPagecall | call requestUrl:%@, publicRoomId:%@, query:%@", requestUrl, publicRoomId, query);
         
         PageCall *pageCall = [PageCall sharedInstance];
-        //[pageCall setDelegate:self];
-
-//        #if DEBUG
-//        #else
-//        [pageCall redirectLogToDocumentsWithTimeInterval:4];
-//        #endif
         pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
-
         UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
         while (rootViewController.presentedViewController != nil) {
             rootViewController = rootViewController.presentedViewController;
@@ -27,6 +20,40 @@ RCT_EXPORT_METHOD(startPageCallWithUrl:(NSString *)requestUrl publicRoomId:(NSSt
 
         [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
             [pageCall call:requestUrl publicRoomId:publicRoomId query:query];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(connectIn:(NSDictionary *)pcaInfo roomData:(NSDictionary *)roomData userData:(NSDictionary *)userData template:(NSDictionary *)template) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        RCTLog(@"RNPagecall | connectIn pcaInfo:%@", pcaInfo);
+        
+        PageCall *pageCall = [PageCall sharedInstance];
+        pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+        while (rootViewController.presentedViewController != nil) {
+            rootViewController = rootViewController.presentedViewController;
+        }
+
+        [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
+            [pageCall connectIn:pcaInfo roomData:roomData userData:userData template:template];
+        }];
+    });
+}
+
+RCT_EXPORT_METHOD(loadHTMLString:(NSString *)htmlString) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        RCTLog(@"RNPagecall | loadHTMLString=%@", htmlString);
+        
+        PageCall *pageCall = [PageCall sharedInstance];
+        pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
+        UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
+        while (rootViewController.presentedViewController != nil) {
+            rootViewController = rootViewController.presentedViewController;
+        }
+
+        [rootViewController presentViewController:pageCall.mainViewController animated:YES completion:^{
+            [pageCall loadHTMLString:htmlString];
         }];
     });
 }
@@ -39,6 +66,13 @@ RCT_EXPORT_METHOD(startLiveStreamingWithURL:(NSString *)serverURL) {
         PageCall *pageCall = [PageCall sharedInstance];
         //[pageCall setDelegate:self];
         
+#if DEBUG
+#else
+        // enable log
+        //[pageCall redirectLogToDocumentsWithRoomCount:3];
+        [pageCall redirectLogToDocumentsWithTimeInterval:4];
+#endif
+        
         pageCall.mainViewController.modalPresentationStyle = UIModalPresentationOverFullScreen;
         UIViewController *rootViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
         while (rootViewController.presentedViewController != nil) {
@@ -50,5 +84,7 @@ RCT_EXPORT_METHOD(startLiveStreamingWithURL:(NSString *)serverURL) {
         }];
     });
 }
+
+
 
 @end

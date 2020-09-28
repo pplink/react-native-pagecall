@@ -33,17 +33,52 @@ export default class App extends Component {
     this.setState({ roomID: text });
   };
 
+  startCall = (serverURL) => {
+    AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
+
+    // PCA URL, publicRoomId, query
+    RNPagecall.call("https://pplink.net/call", "publicRoomId12", null);
+  };
+
+  startConnectIn = (serverURL) => {
+    pcaInfo = {
+      url: "https://pplink.net/demo_call",
+      userId: "userId",
+      publicRoomId: "publicRoomId",
+      allowedTime: 10
+    };
+
+    roomData = {
+      room: "PageCall Test Room",
+      title: "PageCall Test"
+    };
+
+    userData = {
+      frame: 30,
+      mirror: true
+    };
+
+    templete = {
+      vidioPosition: "floating",
+      language: "en"
+    };
+
+    RNPagecall.connectIn(pcaInfo, roomData, userData, templete);
+  };
+
+  startLoadHTMLString = () => {
+    RNPagecall.loadHTMLString("html strings");
+  };
+
+  startLiveStreaming = (serverURL) => {
+    AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
+    RNPagecall.startLiveStreamingWithURL(serverURL);
+  };
+
   // startLiveStreaming = (serverURL, roomID) => {
   //   AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
   //   RNPagecall.startLiveStreamingWithURL(serverURL, false, roomID, "","");
   // };
-
-  startLiveStreaming = (serverURL) => {
-    AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
-    //RNPagecall.startLiveStreamingWithURL(serverURL);
-    // PCA URL, publicRoomId, query
-    RNPagecall.startPageCallWithUrl("https://pplink.net/call", "publicRoomId_Test", null);
-  };
 
   componentDidMount() {
     AsyncStorage.getItem('userInfo').then((state)=> {
@@ -77,8 +112,9 @@ export default class App extends Component {
         /> */}
         <TouchableOpacity
           style={styles.submitButton}
-          //onPress={() => this.startLiveStreaming(this.state.serverURL, this.state.roomID)}
-          onPress={() => this.startLiveStreaming(this.state.serverURL)}
+          onPress={() => this.startCall(this.state.serverURL)}
+          //onPress={() => this.startConnectIn(this.state.serverURL)}
+          //onPress={() => this.startLoadHTMLString()}
         >
           <Text style={styles.submitButtonText}>Start!!</Text>
         </TouchableOpacity>
