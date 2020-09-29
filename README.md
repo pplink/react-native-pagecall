@@ -75,4 +75,10 @@ You can add a **Privacy Policy** to your iOS project's info.plist like shown bel
 
 ## Bitcode
 
-Build Settings → Build Options → Set `Enable Bitcode = No`
+Build Settings → Build Options → Set `Enable Bitcode = No` 
+
+## Background Modes
+
+Signing & Capabilities → + Capability → Background Modes → Check Voice over IP
+
+![react-native-pagecall%206805d95a958243d58997a4fd6f72c0ce/_2020-09-29__7.22.43.png](react-native-pagecall%206805d95a958243d58997a4fd6f72c0ce/_2020-09-29__7.22.43.png)
