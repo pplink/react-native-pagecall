@@ -72,3 +72,7 @@ You can add a **Privacy Policy** to your iOS project's info.plist like shown bel
 <key>NSPhotoLibraryAddUsageDescription</key>
 <string>Our application needs permission to write photos...</string>
 ```
+
+## Bitcode
+
+Build Settings → Build Options → Set `Enable Bitcode = No`
