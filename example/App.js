@@ -37,7 +37,7 @@ export default class App extends Component {
     AsyncStorage.setItem('userInfo', JSON.stringify(this.state));
 
     // PCA URL, publicRoomId, query
-    RNPagecall.call("https://pplink.net/call", "publicRoomId", null);
+    RNPagecall.call("https://pplink.net/call_new", "publicRoomId", "preset=mobile-student-canvas");
   };
 
   startConnectIn = (serverURL) => {
